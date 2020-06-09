@@ -1,0 +1,59 @@
+MethodNotAllowedHttpException terjadi karena route salah method atau tidak sesuai dengan requestnya
+
+jika ingin menabmbahkan helper function global harus dikonfigurasi ulang pada file composer.json pada bagian "autoload", tambahkan dibawah psr-4 dan cantumkan file helper global function, jika sudah, jalankan dump autoload pada terminal "composer dumpautoload"
+
+middleware yangg dibuat baru, harus diregistrasikan dahulu pada project laravel, daftarkan pada app/kernel.php, pada project ini middleware yang baru atau yang dibuat adalah CheckRole, di bagian protected $routeMiddleware ,'checkRole' => \App\Http\Middleware\CheckRole::class,
+
+
+untuk bagian blog post
+
+rancangan
+
+user hasmanyPost (user punya banyak post), sedangkan post belongsto user (1 post di miliki user)
+
+ini punya siswa/index.blade, data looping menggunakan table biasa bawaan laravel, kemudian diganti dengan datatables
+
+<?php $no = 0;
+											?>
+											@foreach($data_siswa as $siswa)
+											<?php $no++;
+											?>
+											<tr>
+												<!-- <td>{{$siswa->id}}</td> -->
+												<td>{{$no}}</td>
+												<td><a href="siswa/{{$siswa->id}}/profile">{{$siswa->nama_depan}}</a></td>
+												<td><a href="siswa/{{$siswa->id}}/profile">{{$siswa->nama_belakang}}</a></td>
+												<td>{{$siswa->jenis_kelamin}}</td>
+												<td>{{$siswa->agama}}</td>
+												<td>{{$siswa->alamat}}</td>
+												<td>{{$siswa->hitung()}}</td>
+												<td>
+													<a href="/siswa/{{$siswa->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
+													<a href="#" class="btn btn-danger btn-sm deletesis" siswa-id="{{$siswa->id}}">Delete</a>
+												</td>
+											</tr>
+										@endforeach
+
+function first dalam slug adalah untuk mengambil row yang sesuai dengan slug yang di request
+
+
+pada list rangking 5 besar menggunakan global function helper laravel, yaitu fungsi di daftarkan pada fungsi file bernama global.php, masukan fungsi yang akan di panggil
+
+pivot table adalah hubungan antara dua table yang saling berkaitan, pada project ini saya memiliki table pivot yaitu mapel_siswa, yang mana menampung id siswa dan id mapel, dan ada nilai untuk di relasikan
+
+{{$data_siswa->links()}} adalah memanggil fungsi paginate dalam views dan controller, menggunakan paginate
+	$variable = \App\Model\::paginate(20) // 20 adalah jumlah data yang mau ditampilkan atau mau dibagi di paginate
+
+
+jika karakter berspasi tambahkan tanda petik, biasanya pada error berisi info tentang surround by quotes
+
+
+hasOne adalah relasi one to one pada table
+hasMany adalah relasi one to many pada table
+
+belongsto adalah relasi many to one
+belongtomany adalah relasi untuk many to many
+
+membuat user_id yang sedang login untuk menambahkan pada forum,
+
+$request->request->add(['user_id' => auth()->user()->id]);
